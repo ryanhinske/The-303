@@ -473,6 +473,128 @@
         }
         .listen-note::before { content: '🎙️'; font-size: 1.1rem; }
  
+ 
+        /* Branded Audio Player */
+        .branded-player {
+            margin-top: 0.75rem;
+        }
+        .bp-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .bp-play-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5fd1, #ff6b35);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px rgba(139,95,209,0.45);
+        }
+        .bp-play-btn:hover { transform: scale(1.08); box-shadow: 0 6px 26px rgba(139,95,209,0.65); }
+        .bp-play-btn svg { width: 18px; height: 18px; fill: white; }
+        .bp-play-btn.playing .bp-play-icon { display: none; }
+        .bp-play-btn.playing .bp-pause-icon { display: block !important; }
+        .bp-time-current, .bp-time-total {
+            font-size: 0.75rem;
+            color: rgba(182,160,215,0.75);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            min-width: 36px;
+        }
+        .bp-progress-wrap {
+            flex: 1;
+            position: relative;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .bp-progress-bg {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+        .bp-progress-fill {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5fd1, #ff6b35);
+            border-radius: 4px;
+            width: 0%;
+            pointer-events: none;
+            transition: width 0.1s linear;
+        }
+        .bp-progress-thumb {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            background: #fff;
+            border-radius: 50%;
+            left: 0%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 8px rgba(139,95,209,0.8);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s, left 0.1s linear;
+        }
+        .bp-progress-wrap:hover .bp-progress-thumb { opacity: 1; }
+        .bp-vol-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .bp-vol {
+            -webkit-appearance: none;
+            width: 65px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+        .bp-vol::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 11px;
+            height: 11px;
+            background: #8b5fd1;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .bp-waveform {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 30px;
+            margin-top: 0.85rem;
+            padding: 0 2px;
+        }
+        .bp-bar {
+            flex: 1;
+            background: rgba(139,95,209,0.25);
+            border-radius: 2px 2px 0 0;
+            transition: background 0.3s;
+            min-height: 4px;
+        }
+        .bp-waveform.playing .bp-bar:nth-child(odd)  { background: rgba(139,95,209,0.7); animation: bpwave 1.3s ease-in-out infinite; }
+        .bp-waveform.playing .bp-bar:nth-child(even) { background: rgba(255,107,53,0.6); animation: bpwave 1.3s ease-in-out infinite reverse; }
+        .bp-waveform.playing .bp-bar:nth-child(3n)   { animation-delay: 0.2s; }
+        .bp-waveform.playing .bp-bar:nth-child(5n)   { animation-delay: 0.4s; }
+        .bp-waveform.playing .bp-bar:nth-child(7n)   { animation-delay: 0.15s; }
+        @keyframes bpwave {
+            0%, 100% { transform: scaleY(0.4); }
+            50%       { transform: scaleY(1.1); }
+        }
+        @media (max-width: 768px) {
+            .bp-vol-wrap { display: none; }
+        }
         /* Responsive */
         @media (max-width: 1100px) { .articles-grid-preview, .articles-grid-full, .podcast-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
@@ -569,7 +691,7 @@
             slug: "big-ten-championship-2025",
             emoji: "🏀",
             category: "Basketball",
-            title: "Madness Starts Here: Inside the Big Ten Championship",
+            title: "Early Madness in the Big Ten Championship",
             excerpt: "From the United Center floor to the locker rooms — what Purdue's upset of Michigan taught us about winning in March.",
             date: "Mar. 17, 2026",
             author: "Katherine Silva and Ryan Hinske",
@@ -662,12 +784,90 @@
         <div class="audio-player-wrapper" id="audioPlayerWidget">
             <div class="audio-player-header">
                 <span class="audio-badge">🏀 Listen</span>
-                <span class="audio-show-name">303 Hoops · Big Ten Championship Special</span>
+                <span class="audio-show-name">Big Ten Championship Special</span>
             </div>
-            <div class="audio-episode-title">Madness Starts Here: Inside the Big Ten Championship</div>
+            <div class="audio-episode-title">Early Madness in the Big Ten Championship</div>
             <div class="audio-hosts">Katherine Silva &amp; Ryan Hinske · March 17, 2026 · ~18 min</div>
-            <iframe src="https://archive.org/embed/final-big-ten-podcast" width="100%" height="60" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style="border-radius:10px; margin-top:0.75rem; display:block;"></iframe>
+            <div class="branded-player">
+                <audio id="brandedAudio" preload="metadata" crossorigin="anonymous">
+                    <source src="https://archive.org/download/final-big-ten-podcast/FINAL%20Big%20Ten%20Podcast.mp3" type="audio/mpeg">
+                </audio>
+                <div class="bp-controls">
+                    <button class="bp-play-btn" id="bpPlayBtn" onclick="bpTogglePlay()">
+                        <svg class="bp-play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg class="bp-pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    <div class="bp-time-current" id="bpCurrent">0:00</div>
+                    <div class="bp-progress-wrap" id="bpProgressWrap" onclick="bpSeek(event)">
+                        <div class="bp-progress-bg"></div>
+                        <div class="bp-progress-fill" id="bpFill"></div>
+                        <div class="bp-progress-thumb" id="bpThumb"></div>
+                    </div>
+                    <div class="bp-time-total" id="bpTotal">0:00</div>
+                    <div class="bp-vol-wrap">
+                        <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:rgba(182,160,215,0.7);flex-shrink:0;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                        <input type="range" class="bp-vol" id="bpVol" min="0" max="1" step="0.05" value="1" oninput="bpSetVol(this.value)">
+                    </div>
+                </div>
+                <div class="bp-waveform" id="bpWaveform">
+                    ${Array.from({length:28},(_,i)=>`<div class="bp-bar" style="height:${4+Math.abs(Math.sin(i*0.7)*18)}px"></div>`).join('')}
+                </div>
+            </div>
         </div>`;
+    }
+ 
+    // Branded player logic — runs after DOM is built
+    function bpInit() {
+        const a = document.getElementById('brandedAudio');
+        if (!a) return;
+        a.addEventListener('loadedmetadata', () => {
+            document.getElementById('bpTotal').textContent = bpFmt(a.duration);
+        });
+        a.addEventListener('timeupdate', () => {
+            const pct = a.duration ? (a.currentTime / a.duration) * 100 : 0;
+            document.getElementById('bpFill').style.width = pct + '%';
+            document.getElementById('bpThumb').style.left = pct + '%';
+            document.getElementById('bpCurrent').textContent = bpFmt(a.currentTime);
+        });
+        a.addEventListener('play', () => {
+            document.getElementById('bpPlayBtn').classList.add('playing');
+            document.getElementById('bpWaveform').classList.add('playing');
+        });
+        a.addEventListener('pause', () => {
+            document.getElementById('bpPlayBtn').classList.remove('playing');
+            document.getElementById('bpWaveform').classList.remove('playing');
+        });
+        a.addEventListener('ended', () => {
+            document.getElementById('bpPlayBtn').classList.remove('playing');
+            document.getElementById('bpWaveform').classList.remove('playing');
+        });
+        a.addEventListener('error', () => {
+            const wrap = document.getElementById('audioPlayerWidget');
+            if (wrap) {
+                const fb = wrap.querySelector('.branded-player');
+                if (fb) fb.innerHTML = `<iframe src="https://archive.org/embed/final-big-ten-podcast" width="100%" height="60" frameborder="0" allowfullscreen style="border-radius:8px;margin-top:0.5rem;display:block;"></iframe>`;
+            }
+        });
+    }
+    function bpFmt(s) {
+        if (!s || isNaN(s)) return '0:00';
+        return Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
+    }
+    function bpTogglePlay() {
+        const a = document.getElementById('brandedAudio');
+        if (!a) return;
+        a.paused ? a.play() : a.pause();
+    }
+    function bpSeek(e) {
+        const a = document.getElementById('brandedAudio');
+        const wrap = document.getElementById('bpProgressWrap');
+        if (!a || !wrap) return;
+        const r = wrap.getBoundingClientRect();
+        a.currentTime = ((e.clientX - r.left) / r.width) * a.duration;
+    }
+    function bpSetVol(v) {
+        const a = document.getElementById('brandedAudio');
+        if (a) a.volume = v;
     }
  
  
@@ -675,7 +875,7 @@
     function buildPodcastBody() {
         return `
         <p class="transcript-intro">
-            Katherine Silva and Ryan Hinske were on the floor at the United Center in Chicago on March 15 when Purdue — a seven seed — knocked off top-seeded Michigan in the Big Ten Tournament Championship. They split up afterward: one went to the winning locker room, one to the losing press conference. This is what they found.
+            At the United Center on March 15, No. 7 seed Purdue defeated top-ranked Michigan for the conference title. As the world fills out their brackets, what did this game tell us about who our champion will be? Here's what we found.
         </p>
  
         ${buildAudioPlayer()}
@@ -698,10 +898,7 @@
             <div class="dialogue-speaker ryan">Ryan Hinske</div>
             <p class="dialogue-text">This is the Big Ten Championship, and it told us a lot about what it takes to win it all.</p>
         </div>
- 
-        <div class="section-divider"><span>Setting the Stage</span></div>
- 
-        <div class="dialogue-block">
+<div class="dialogue-block">
             <div class="dialogue-speaker ryan">Ryan Hinske</div>
             <p class="dialogue-text">So Katherine, we were at the Big Ten Championship game on March 15. Purdue comes in, playing their fourth game in four days. Top-seeded Michigan is playing their third in three. There's fatigue all around. This game is obviously in Chicago — a central location. Purdue fans are coming out in large swaths, same with Michigan fans. Michigan has been dominant all regular season. They were the Big Ten champions for the regular season. They only lost two games, both at home. But they've gotten by narrowly — they beat Ohio State by four, Wisconsin by three. So it hasn't been the same level of dominance that they've had all season.</p>
         </div>
@@ -710,10 +907,7 @@
             <div class="dialogue-speaker katherine">Katherine Silva</div>
             <p class="dialogue-text">Yeah. So basically, we had a typical March Madness type of first half — it was 38 a piece going into halftime. Even though it was tied, I felt like Purdue was winning the game just with the underdog mentality. They were diving on loose balls. But the first half isn't really the story of this game. The second half is where the real meat lies.</p>
         </div>
- 
-        <div class="section-divider"><span>The Second Half Shift</span></div>
- 
-        <div class="dialogue-block">
+<div class="dialogue-block">
             <div class="dialogue-speaker ryan">Ryan Hinske</div>
             <p class="dialogue-text">Purdue is known for their roster continuity. They've got Braden Smith and Trey Kaufman-Renn, who in the second half really get into flow state. These two bigs — Kaufman-Renn and newcomer Oscar Cluff — had a combined 41 points. They were super physical and found their shots in the paint. Cluff is a newcomer who came in from South Dakota State, started at Washington State — he's been at three different schools in three different years. You've had Zach Edey in the past. Braden Smith, this is his team. You're coming in as a newcomer and there's that much put on you — and he ended up with 21.</p>
         </div>
@@ -742,10 +936,7 @@
             <div class="dialogue-speaker katherine">Katherine Silva</div>
             <p class="dialogue-text">He went from his own number three Smith on the back to a nameless number 41 — and then he was balling. 14 points, 11 assists. He's one assist away from tying Bobby Hurley's record. That's when the tug of war sort of ended, and Purdue pulled Michigan over the line. The momentum stayed their way for the rest of the game.</p>
         </div>
- 
-        <div class="section-divider"><span>Reading the Room: Body Language</span></div>
- 
-        <div class="dialogue-block">
+<div class="dialogue-block">
             <div class="dialogue-speaker ryan">Ryan Hinske</div>
             <p class="dialogue-text">I want to go into our observations about Michigan's body language at this point. When Braden Smith is finally done hyping up the crowd and goes back to the huddle, Michigan is still. It's not really jitters, it's not nervousness — it's just stillness. It's somewhere they haven't been before. When they've lost, they've lost at home, with fans behind them. Then they come out with 30 seconds to spare in the timeout while the Purdue cheerleaders are still performing. From that point, every huddle was a little less connected — less of the embrace you see the five players doing every time there's a foul or free throw.</p>
         </div>
@@ -759,10 +950,7 @@
             <div class="dialogue-speaker guest">Matt Painter — Purdue Head Coach</div>
             <p class="dialogue-quote">"We've had the number one attendance in the country as a conference since 1976. You know, it speaks volumes. Like, we go into real venues and packed houses, and it is difficult."</p>
         </div>
- 
-        <div class="section-divider"><span>After the Final Buzzer</span></div>
- 
-        <div class="dialogue-block">
+<div class="dialogue-block">
             <div class="dialogue-speaker ryan">Ryan Hinske</div>
             <p class="dialogue-text">Purdue wins 80 to 72. It's the last game before Selection Sunday. We decided to split up — Katherine, you spent time with Michigan. I went to see the victors.</p>
         </div>
@@ -816,10 +1004,7 @@
             <div class="dialogue-speaker ryan">Ryan Hinske</div>
             <p class="dialogue-text">Three different players said they were really focused on hoping to play on Friday instead of Thursday — which speaks to just how fatigued they were after four games in four days.</p>
         </div>
- 
-        <div class="section-divider"><span>What It Takes to Win in March</span></div>
- 
-        <div class="dialogue-block">
+<div class="dialogue-block">
             <div class="dialogue-speaker katherine">Katherine Silva</div>
             <p class="dialogue-text">I want to ask you what this means for the NCAA Tournament. How can we use this game to define what a team needs to win it all? Because on either side, this could be good fuel for Michigan.</p>
         </div>
@@ -974,6 +1159,7 @@
  
  
         window.scrollTo(0, 0);
+        if (art.isPodcastArticle) { setTimeout(bpInit, 0); }
     }
  
     // ---- PODCASTS ----
