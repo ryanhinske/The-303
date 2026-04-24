@@ -194,12 +194,6 @@
         }
         .close { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: #ff6b35; }
  
-        /* Footer */
-        .newsletter-footer { background: #16213e; padding: 4rem 5%; text-align: center; border-top: 3px solid #4e2a84; }
-        .newsletter-form { display: flex; gap: 1rem; max-width: 600px; margin: 2rem auto; }
-        .newsletter-input { flex: 1; padding: 1rem; border-radius: 50px; border: 2px solid #4e2a84; background: #1a1a2e; color: white; outline: none; }
-        .success-message { display: none; color: #4caf50; font-weight: bold; }
-        .success-message.show { display: block; }
  
         /* ===== AUDIO PLAYER STYLES ===== */
         .audio-player-wrapper {
@@ -617,7 +611,7 @@
             <li><a href="?">Home</a></li>
             <li><a href="?page=articles">Articles</a></li>
             <li><a href="?#podcasts">Podcasts</a></li>
-            <li><a href="https://www.youtube.com/@The303SportsNetwork" target="_blank">Newscast</a></li>
+            <li><a href="https://youtube.com/playlist?list=PLyZG2tQyljivDizkHVR6V3rxcIfTpGb1X&si=skOOwsOfKaxg7mAp" target="_blank">Newscast</a></li>
         </ul>
     </div>
 </nav>
@@ -1196,12 +1190,6 @@
     function closePodcastModal() { document.getElementById('podcastModal').style.display = 'none'; }
     window.onclick = e => { if (e.target.id === 'podcastModal') closePodcastModal(); };
  
-    // ---- NEWSLETTER ----
-    function handleSubscribe(e) {
-        e.preventDefault();
-        document.getElementById('successMessage').classList.add('show');
-        e.target.reset();
-    }
  
     // ---- HERO ANIMATION ----
     const words = ["Sports", "Football", "Basketball", "Baseball", "Soccer", "Hockey", "Analytics"];
